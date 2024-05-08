@@ -119,7 +119,7 @@ app.post('/send-invitation', async (req, res) => {
     console.log(process.env.email)
     const { recipientEmail } = req.body;
     const transporter = nodemailer.createTransport({
-        host: smtp.mailersend.net,
+        host: process.env.SMTP,
         port: process.env.SMTP_PORT,
         secure: false,
         auth: {
