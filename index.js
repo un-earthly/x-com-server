@@ -1,11 +1,6 @@
 let request = require('request')
-
-const SHOP_URL = "sceteehub.myshopify.com";
-const API_KEY = "6c9c46f762215c6114522e8a6a147b9e";
-const PASSWORD = "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";
-const formData = require('form-data');
 const nodemailer = require("nodemailer");
-
+require("dotenv").config()
 // Function to send request to Shopify API
 function sendRequest(headers, url, method, body) {
     return new Promise((resolve, reject) => {
@@ -121,14 +116,15 @@ app.post('/order/:id', async (req, res) => {
 
 // API endpoint to send invitation email
 app.post('/send-invitation', async (req, res) => {
+    console.log(process.env.email)
     const { recipientEmail } = req.body;
     const transporter = nodemailer.createTransport({
-        host: 'smtp.mailgun.org', // You can use any other email service
-        port: 587,
+        host: smtp.mailersend.net,
+        port: process.env.SMTP_PORT,
         secure: false,
         auth: {
-            user: 'postmaster@sandboxbe345e5a552f411bb35b88b1c4f3c6b0.mailgun.org', // Your email address
-            pass: 'cfb1c77b3aabfa97a6b22302fa0d3259-50f43e91-b2a6f803' // Your email password
+            user: process.env.SMTP_USERNAME,
+            pass: process.env.SMTP_PASS
         }
     });
     try {
