@@ -116,7 +116,6 @@ app.post('/order/:id', async (req, res) => {
 
 // API endpoint to send invitation email
 app.post('/send-invitation', async (req, res) => {
-    console.log(process.env.email)
     const { recipientEmail } = req.body;
     const transporter = nodemailer.createTransport({
         host: process.env.SMTP,
